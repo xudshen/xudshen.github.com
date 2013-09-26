@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: UI | XdShen's Blog]]></title>
+  <link href="http://xudshen.github.com/categories/ui/atom.xml" rel="self"/>
+  <link href="http://xudshen.github.com/"/>
+  <updated>2013-06-08T01:05:34+08:00</updated>
+  <id>http://xudshen.github.com/</id>
+  <author>
+    <name><![CDATA[XdShen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[zhihu]答：为什么现在的 GUI 设计仍跳不出 button、list、icon，没有这些元素的 GUI 会是什么样子？]]></title>
+    <link href="http://xudshen.github.com/archives/2013/06/08/why-are-button-list-the-basic-ui-control/"/>
+    <updated>2013-06-08T00:48:00+08:00</updated>
+    <id>http://xudshen.github.com/archives/2013/06/08/why-are-button-list-the-basic-ui-control</id>
+    <content type="html"><![CDATA[<p>此为zhihu上的一个提问，<a href="http://www.zhihu.com/question/20269253">原文在这里</a>。</p>
+
+<p>button,list等作为一些基础控件，从较高的层面讲，他们阐释了<strong>基本的交互语言，从而实现界面交互</strong>；就像在研究素描时，大多也就可以由三角形、圆形、矩形等构成（图一）。</p>
+
+<!--more-->
+
+
+<p><img src="/assets/2013/06/08/sketch.jpg" alt="图一：素描" /></p>
+
+<p>举个例子吧，图二是一个颜色拾取板，简单分析一下，就会发现其实这一圈就是个list，只不过和一般直直的list不同，每个item进行了固定角度的旋转。</p>
+
+<p><img src="/assets/2013/06/08/circlelist.jpg" alt="图二" /></p>
+
+<p>再如1l所说的日期选择控件（图三），仍然逃不过所谓的button，list的命运。</p>
+
+<p>我们可以叫他新控件，也可以叫做旧控件的新组合（并算不上新的交互）。</p>
+
+<p><img src="/assets/2013/06/08/datepicker.jpg" alt="图三" /></p>
+
+<p>因此，在控件设计时往往有一项准则：</p>
+
+<p><blockquote><p>如果可以用以往的基本控件来组合，那么就不要重新创造一个新控件。</p></blockquote></p>
+
+<p>个人看来，我们现在所说的新控件，往往是添加或重组了<strong>交互方式/顺序</strong>，并未能跳出基本控件的框框。（欢迎lx举出例子来反驳）</p>
+
+<p>至于button，list这些基本控件是如何设计出来的，只能佩服前人的创造，简洁而又强大。</p>
+
+<p>这样应该能够回答lz的“为什么现在的 GUI 设计仍跳不出 button,list的框架”这个问题。</p>
+
+<hr />
+
+<p>Add：
+看了一些回答，有的从与日常生活的映射角度来分析。</p>
+
+<p>突发奇想，要是从集合论的角度，</p>
+
+<p>所有物体的集合对应list，</p>
+
+<p>而对物体的操作对应button，</p>
+
+<p>如此似乎能解释这些基础控件的起源=。=</p>
+
+<p>想法不靠谱，额嗬嗬嗬嗬嗬嗬嗬嗬，，，</p>
+]]></content>
+  </entry>
+  
+</feed>

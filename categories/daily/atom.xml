@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: daily | XdShen's Blog]]></title>
+  <link href="http://xudshen.github.com/categories/daily/atom.xml" rel="self"/>
+  <link href="http://xudshen.github.com/"/>
+  <updated>2013-06-08T01:05:34+08:00</updated>
+  <id>http://xudshen.github.com/</id>
+  <author>
+    <name><![CDATA[XdShen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[优酷手机党福利]]></title>
+    <link href="http://xudshen.github.com/archives/2013/04/10/generate-html5-video/"/>
+    <updated>2013-04-10T16:27:00+08:00</updated>
+    <id>http://xudshen.github.com/archives/2013/04/10/generate-html5-video</id>
+    <content type="html"><![CDATA[<p>用lumia在优酷上看视频有个问题：不支持flash，</p>
+
+<p>虽说有html5了，也有m.youku.com，但还是好多视频看不了，</p>
+
+<p>所以搞了个小蛋疼代码。</p>
+
+<!--more-->
+
+
+<hr />
+
+<h3>输入</h3>
+
+<script type="text/javascript">
+    function doAdd()
+    {
+        var element = document.getElementById("showFrame");
+        element.innerHTML = document.getElementById("srcUrl").value;
+    };
+</script>
+
+
+<div>
+    <input id="srcUrl" type="text" value="" autocomplete="off">
+    <button onClick="doAdd()">Generate</button>
+</div>
+
+
+<div id="showFrame">
+</div>
+
+
+<hr />
+
+<h3>使用方法</h3>
+
+<ol>
+<li><p>点击优酷页面中的分享，如下图</p>
+
+<p><img src="/assets/2013/04/10/youku1.jpg" alt="点击优酷页面中的分享" /></p></li>
+<li><p>选择通用代码，拷贝到上面的输入框中，如下图</p>
+
+<p><img src="/assets/2013/04/10/youku2.jpg" alt="选择通用代码" /></p></li>
+<li><p>点击Generate即可观看</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[乔迁之喜]]></title>
+    <link href="http://xudshen.github.com/archives/2013/04/09/cong/"/>
+    <updated>2013-04-09T01:01:00+08:00</updated>
+    <id>http://xudshen.github.com/archives/2013/04/09/cong</id>
+    <content type="html"><![CDATA[<p>近日将从博客园陆续搬过来。</p>
+
+<p>高兴高兴！</p>
+
+<!--more-->
+
+]]></content>
+  </entry>
+  
+</feed>

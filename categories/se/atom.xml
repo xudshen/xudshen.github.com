@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: se | XdShen's Blog]]></title>
+  <link href="http://xudshen.github.com/categories/se/atom.xml" rel="self"/>
+  <link href="http://xudshen.github.com/"/>
+  <updated>2013-06-08T01:05:34+08:00</updated>
+  <id>http://xudshen.github.com/</id>
+  <author>
+    <name><![CDATA[XdShen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[软工_API定义]]></title>
+    <link href="http://xudshen.github.com/archives/2013/04/19/se-api-define/"/>
+    <updated>2013-04-19T10:12:00+08:00</updated>
+    <id>http://xudshen.github.com/archives/2013/04/19/se-api-define</id>
+    <content type="html"><![CDATA[<p>软件工程课程项目API</p>
+
+<p>为了进行更好的分工合作，将API罗列如下...</p>
+
+<!--more-->
+
+
+<h1>教程</h1>
+
+<p>由于项目将使用tomcat+struts2+mysql搭建，请认真阅读sample中的表格提交功能以及数据加载功能。</p>
+
+<p><a href="http://6carol6.github.io/blog/2013/04/20/school-management-system-outline/">Sample的一个简单[但不全面]的运行描述</a> 感谢小组长<a href="http://6carol6.github.io/">@6carol6</a>童鞋。</p>
+
+<hr />
+
+<h1>API</h1>
+
+<h3>Index</h3>
+
+<p><a href="#1">1. 登陆</a></p>
+
+<p><a href="#2">2. 学生</a></p>
+
+<p><a href="#2-0">2.0 class StuClass</a></p>
+
+<p><a href="#2-1">2.1 个人信息页面</a></p>
+
+<p><a href="#2-1-1">2.1.1 毕业信息核对</a></p>
+
+<p><a href="#2-1-2">2.1.2 基本信息修改</a></p>
+
+<hr />
+
+<h3><a name="#1">1. 登陆(/pages/Login.jsp)</a></h3>
+
+
+<p><code>action name:</code>  Login</p>
+
+<p><code>servlet name:</code> SampleProject.Login</p>
+
+<p><code>page value:</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name     </th>
+<th align="left">type    </th>
+<th align="left">field    </th>
+<th align="left">more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">username </td>
+<td align="left">String  </td>
+<td align="left">         </td>
+<td align="left">用户名</td>
+</tr>
+<tr>
+<td align="left">password </td>
+<td align="left">String  </td>
+<td align="left">         </td>
+<td align="left">密码</td>
+</tr>
+<tr>
+<td align="left">identity </td>
+<td align="left">String  </td>
+<td align="left">{0,1,2}  </td>
+<td align="left">用户身份：学生、教师、管理员</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><em>请注意这里page value的使用：是指页面将需要对应的action类中实现相应的getter和setter函数</em></p>
+
+<p><em>例如：</em>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>表单提交  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//表单提交将默认执行action中的execute函数</span>
+</span><span class='line'><span class="c1">//在执行该函数之前，所有表单中的项 将 调用 对应的setter函数进行赋值&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//Login.jsp</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">textfield</span> <span class="n">key</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'><span class="c1">//Login.java</span>
+</span><span class='line'><span class="kd">private</span> <span class="n">String</span> <span class="n">username</span><span class="o">;</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">getUsername</span><span class="o">()</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">username</span><span class="o">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUsername</span><span class="o">(</span><span class="n">String</span> <span class="n">username</span><span class="o">)</span> <span class="c1">//username = &quot;admin&quot;</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">this</span><span class="o">.</span><span class="na">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">;</span> <span class="c1">//this.username = &quot;admin&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//此时调用</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">String</span> <span class="nf">execute</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">getUsername</span><span class="o">();</span><span class="c1">//得到&quot;admin&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><code>action method:</code></p>
+
+<p>execute => 验证用户身份，失败返回INPUT</p>
+
+<p>*return: *</p>
+
+<p>"student" => student/StuInfo.action</p>
+
+<p>"teacher" => teacher/TeacherInfo.action</p>
+
+<p>"admin" => admin/AdminInfo.action</p>
+
+<p>ERROR/INPUT => /pages/Login.jsp(with validation error)</p>
+
+<p><code>on the back:</code></p>
+
+<ul>
+<li>验证用户名和密码</li>
+</ul>
+
+
+<p><code>more TODO:</code></p>
+
+<ul>
+<li>用户Cookie</li>
+<li>用户密码RSA加密</li>
+<li>验证码</li>
+</ul>
+
+
+<hr />
+
+<h3><a name="#2">2. 学生</a></h3>
+
+
+
+
+<h4><a name="#2-0">2.0 class StuClass(/pages/student/info.jsp)</a></h4>
+
+
+<table>
+<thead>
+<tr>
+<th align="left">name     </th>
+<th align="left">type    </th>
+<th align="left">field    </th>
+<th align="left">more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">no</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学号</td>
+</tr>
+<tr>
+<td align="left">name</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">姓名 </td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">身份证</td>
+</tr>
+<tr>
+<td align="left">birth</td>
+<td align="left">Date</td>
+<td align="left"></td>
+<td align="left">出生日期</td>
+</tr>
+<tr>
+<td align="left">dept</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">院系</td>
+</tr>
+<tr>
+<td align="left">major</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">专业</td>
+</tr>
+<tr>
+<td align="left">domain</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">研究方向</td>
+</tr>
+<tr>
+<td align="left">enrollyear</td>
+<td align="left">Date</td>
+<td align="left"></td>
+<td align="left">入学年份</td>
+</tr>
+<tr>
+<td align="left">grade</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">所属年级</td>
+</tr>
+<tr>
+<td align="left">schoolyear</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学制</td>
+</tr>
+<tr>
+<td align="left">state</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学籍状态</td>
+</tr>
+<tr>
+<td align="left">degree</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学位</td>
+</tr>
+<tr>
+<td align="left">mobile</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">手机号</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">邮箱</td>
+</tr>
+<tr>
+<td align="left">addr</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">地址</td>
+</tr>
+<tr>
+<td align="left">postcode</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">邮编</td>
+</tr>
+<tr>
+<td align="left">fname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">父姓名</td>
+</tr>
+<tr>
+<td align="left">fwork</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">父工作单位</td>
+</tr>
+<tr>
+<td align="left">mname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">母姓名</td>
+</tr>
+<tr>
+<td align="left">mname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">母工作单位</td>
+</tr>
+<tr>
+<td align="left">homeNumber</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">家庭电话</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><em>这里列出的是指对应的StuClass实例里面需要实现的getter和setter函数</em></p>
+
+<p><em>例如：</em>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="c1">//页面需要name的值，</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">lt</span><span class="o">;</span><span class="nl">s:</span><span class="n">property</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;detail.name&quot;</span><span class="o">&gt;</span>
+</span><span class='line'><span class="c1">//而在后台action的类里面，有</span>
+</span><span class='line'><span class="kd">private</span> <span class="n">StuClass</span> <span class="n">detail</span><span class="o">;</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">StuClass</span> <span class="nf">getDetail</span><span class="o">()</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">detail</span><span class="o">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span><span class='line'><span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDetail</span><span class="o">(</span><span class="n">StuClass</span> <span class="n">detail</span><span class="o">)</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">this</span><span class="o">.</span><span class="na">detail</span> <span class="o">=</span> <span class="n">detail</span><span class="o">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span><span class='line'><span class="c1">//那么StuClass这个类中需要有name的getter，即：</span>
+</span><span class='line'><span class="kd">public</span> <span class="n">StuClass</span> <span class="nf">getName</span><span class="o">()</span>
+</span><span class='line'><span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="n">xxxxxx</span><span class="o">;</span><span class="c1">//随便返回什么，但它的值必须是我要的name</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<br/>
+
+
+<hr />
+
+<h4><a name="#2-1">2.1 个人信息页面(/pages/student/info.jsp)</a></h4>
+
+
+<p><code>action name:</code>  StuInfo</p>
+
+<p><code>servlet name:</code> SampleProject.Student.Info</p>
+
+<p><code>page value:</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name     </th>
+<th align="left">type    </th>
+<th align="left">field    </th>
+<th align="left">more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">username </td>
+<td align="left">String  </td>
+<td align="left">         </td>
+<td align="left">用户名</td>
+</tr>
+<tr>
+<td align="left">identity </td>
+<td align="left">String  </td>
+<td align="left">{0,1,2}  </td>
+<td align="left">用户身份：学生、教师、管理员</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><code>action method:</code></p>
+
+<p>execute => 利用session获得用户名和用户身份</p>
+
+<p><em>return:</em></p>
+
+<p>SUCCESS => /pages/student/info.jsp</p>
+
+<p>ERROR => Login.action</p>
+
+<p><code>on the back:</code></p>
+
+<ul>
+<li>利用session获得用户名和用户身份</li>
+<li>验证用户名权限，错误则返回Login.action</li>
+</ul>
+
+
+<p><code>more TODO:</code></p>
+
+<ul>
+<li>全局通知栏</li>
+</ul>
+
+
+<hr />
+
+<h4><a name="#2-1-1">2.1.1 毕业信息核对(/pages/student/infoCheck.jsp)</a></h4>
+
+
+<p><code>action name:</code>  StuInfoCheck</p>
+
+<p><code>servlet name:</code> SampleProject.Student.InfoCheck</p>
+
+<p><code>page value:(????????)</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name     </th>
+<th align="left">type    </th>
+<th align="left">field    </th>
+<th align="left">more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">detail</td>
+<td align="left"><a href="#2-0">StuClass</a></td>
+<td align="left"></td>
+<td align="left">用户信息</td>
+</tr>
+<tr>
+<td align="left">detail.no</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学号</td>
+</tr>
+<tr>
+<td align="left">detail.name</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">姓名 </td>
+</tr>
+<tr>
+<td align="left">detail.id</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">身份证</td>
+</tr>
+<tr>
+<td align="left">detail.dept</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">院系</td>
+</tr>
+<tr>
+<td align="left">detail.major</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">专业</td>
+</tr>
+<tr>
+<td align="left">detail.domain</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">研究方向</td>
+</tr>
+<tr>
+<td align="left">detail.enrollyear</td>
+<td align="left">Date</td>
+<td align="left"></td>
+<td align="left">入学年份</td>
+</tr>
+<tr>
+<td align="left">detail.grade</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">所属年级</td>
+</tr>
+<tr>
+<td align="left">detail.schoolyear</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学制</td>
+</tr>
+<tr>
+<td align="left">detail.degree</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">学位</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><a href="#2-0">使用说明</a>见学生类</p>
+
+<p><code>action method:</code></p>
+
+<p>execute => 执行基本信息的读取</p>
+
+<p><em>return:</em></p>
+
+<p>SUCCESS => /pages/student/infoCheck.jsp</p>
+
+<p>ERROR => Login.action</p>
+
+<p><code>on the back:</code></p>
+
+<ul>
+<li>利用session获得用户名和用户身份</li>
+<li>验证用户名权限，错误则返回Login.action</li>
+<li>读取学生毕业信息，填充相应字段</li>
+</ul>
+
+
+<p><code>more TODO:</code></p>
+
+<hr />
+
+<h4><a name="#2-1-2">2.1.2 基本信息修改(/pages/student/infoModify.jsp)</a></h4>
+
+
+<p><code>action name:</code>  StuInfoModify</p>
+
+<p><code>servlet name:</code> SampleProject.Student.InfoModify</p>
+
+<p><code>page value:</code></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">name     </th>
+<th align="left">type    </th>
+<th align="left">field    </th>
+<th align="left">more</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">mobile</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">手机号</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">邮箱</td>
+</tr>
+<tr>
+<td align="left">addr</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">地址</td>
+</tr>
+<tr>
+<td align="left">postcode</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">邮编</td>
+</tr>
+<tr>
+<td align="left">fname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">父姓名</td>
+</tr>
+<tr>
+<td align="left">fwork</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">父工作单位</td>
+</tr>
+<tr>
+<td align="left">mname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">母姓名</td>
+</tr>
+<tr>
+<td align="left">mname</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">母工作单位</td>
+</tr>
+<tr>
+<td align="left">homeNumber</td>
+<td align="left">String</td>
+<td align="left"></td>
+<td align="left">家庭电话</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><em>注意</em></p>
+
+<p><code>action method:</code></p>
+
+<p>execute => 执行基本信息的读取</p>
+
+<p><em>return</em></p>
+
+<p>SUCCESS => /pages/student/infoModify.jsp</p>
+
+<p>ERROR => Login.action</p>
+
+<p><code>action method:</code></p>
+
+<p>tryModify => 尝试执行基本信息的修改</p>
+
+<p>成功：addActionMessage()</p>
+
+<p>失败：addActionError()</p>
+
+<p><em>return</em></p>
+
+<p>SUCCESS => /pages/student/infoModify.jsp</p>
+
+<p>"fail" => /pages/student/infoModify.jsp</p>
+
+<p><code>on the back:</code></p>
+
+<ul>
+<li>利用session获得用户名和用户身份</li>
+<li>验证用户名权限，错误则返回Login.action</li>
+<li>在初次载入页面时，将 执行execute函数</li>
+<li>在使用页面上的button提交修改时，将 执行 该action的 tryModify函数</li>
+</ul>
+
+
+<p><code>more TODO:</code></p>
+]]></content>
+  </entry>
+  
+</feed>
