@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>List All Classes after Multidex | xudshen&#39;s blog</title>
+  <meta name="author" content="Xudong Shen">
+  
+  <meta name="description" content="IntroGoogle recently posted an article to solve the 65K Reference Limit problem.It is such a relief that we will not need to worry about the following errors any more.
+123456Conversion to Dalvik format failed:Unable to execute dex: method ID not in [0, 0xffff]: 65536//--or--trouble writing output:Too many field references: 131000; max is 65536.You may try using --multi-dex option.
+ProblemAfter configuring multidex in the module, some projects may encounter the loss of part of the the classes when using reflection to list all the classes in the apk.The usual code may like this:
+123456789//get the apk pathString path = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0).sourceDir;//use DexFile the unzip the apk, find the *classes.dex* in the apkDexFile dexfile = new DexFile(path);//get all the classes in this dexEnumeration&amp;lt;String&amp;gt; dexEntries = dexfile.entries();while (dexEntries.hasMoreElements()) &amp;#123;    classNames.add(dexEntries.nextElement());&amp;#125;">
+  
+  
+  <meta property="og:title" content="List All Classes after Multidex"/>
+  <meta property="og:site_name" content="xudshen&#39;s blog"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+   <link rel="apple-touch-icon" href="/icon.png" />
+   <link rel="shortcut icon" href="/favicon.png" >
+   <link rel="alternate" href="/atom.xml" title="xudshen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="//ajax.useso.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <meta name="theme-color" content="#d00">
+  <link href="http://fonts.useso.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+  <div id="content" class="inner">
+    <aside id="sidebar" class="alignleft">
+      <div class="navigationBar">
+        <a href="/">xudshen&#39;s blog</a>
+      </div>
+    	
+  <nav class="widget" id="menu">
+	<ul>
+    
+      <li class="cell"><a class="next" href="/">Home</a><li>
+    
+      <li class="cell"><a class="next" href="/archives/">Archives</a><li>
+    
+      <li class="cell"><a class="next" href="/about/">About</a><li>
+    
+      <li class="cell"><a class="next" href="/atom.xml">Subscribe</a><li>
+    
+    </ul>
+</nav>
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">标签云</h3>
+  <div class="entry">
+    <a href="/tags/65K/" style="font-size: 10px;">65K</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Gson/" style="font-size: 10px;">Gson</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Multidex/" style="font-size: 10px;">Multidex</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/RxMqtt/" style="font-size: 10px;">RxMqtt</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/WinRT/" style="font-size: 15px;">WinRT</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/Yosemite/" style="font-size: 10px;">Yosemite</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/视差滚动/" style="font-size: 10px;">视差滚动</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/软工/" style="font-size: 10px;">软工</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+  </div>
+</div>
+
+
+  <nav class="widget" id="menu">
+  <ul>
+    
+    <li class="cell"><a class="next" href="//t.xudshen.info">Gallery</a><li>
+      
+  </ul>
+</nav>
+
+  <div class="widget search">
+  <form accept-charset="utf-8">
+    <input id="st-search-input" type="text" name="q" placeholder="搜索">
+  </form>
+</div>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v1/st.js','_st');
+
+  _st('install','XEKS2jHDgy4uUCKWmcLA');
+</script>
+
+    	<footer id="footer" class="inner"><div class="copyright">
+  
+  &copy; 2016 Xudong Shen
+  
+</div>
+
+
+<div style="position:relative; bottom: 23px">
+  <script src="http://s95.cnzz.com/stat.php?id=1253420162&web_id=1253420162&show=pic1" language="JavaScript">
+  </script>
+</div>
+
+
+</footer>
+    </aside>
+    
+    
+    <div id="hidden-navigationBar" class="navigationBar">
+      <a href="/">xudshen&#39;s blog</a>
+    </div>
+    <div id="main-col" class="alignright">
+    <div id="wrapper">
+      
+<article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content" data-swiftype-index='true'>
+  <header>
+      
+      
+  
+    <h1 class="title">List All Classes after Multidex</h1>
+  
+
+      <time datetime="2014-11-12T11:02:29.000Z"><a href="/2014/11/12/list-all-classes-after-multidex/">2014-11-12</a></time>
+      
+  </header>
+    <div class="entry">
+      
+        <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>Google recently posted an <a href="http://developer.android.com/tools/building/multidex.html" target="_blank" rel="external">article</a> to solve the <code>65K Reference Limit</code> problem.<br>It is such a relief that we will not need to worry about the following errors any more.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Conversion to Dalvik format failed:</span><br><span class="line">Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></span><br><span class="line"><span class="comment">//--or--</span></span><br><span class="line">trouble writing output:</span><br><span class="line">Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.</span><br><span class="line">You may <span class="keyword">try</span> using --multi-dex option.</span><br></pre></td></tr></table></figure>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><p>After configuring multidex in the module, some projects may encounter the loss of part of the the classes when using reflection to list all the classes in the apk.<br>The usual code may like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//get the apk path</span></span><br><span class="line">String path = context.getPackageManager().getApplicationInfo(context.getPackageName(), <span class="number">0</span>).sourceDir;</span><br><span class="line"><span class="comment">//use DexFile the unzip the apk, find the *classes.dex* in the apk</span></span><br><span class="line">DexFile dexfile = <span class="keyword">new</span> DexFile(path);</span><br><span class="line"><span class="comment">//get all the classes in this dex</span></span><br><span class="line">Enumeration&lt;String&gt; dexEntries = dexfile.entries();</span><br><span class="line"><span class="keyword">while</span> (dexEntries.hasMoreElements()) &#123;</span><br><span class="line">    classNames.add(dexEntries.nextElement());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="Clue-1"><a href="#Clue-1" class="headerlink" title="Clue 1"></a>Clue 1</h2><p>It’s easy to get the source code of <code>DexFile.java</code>,<br><figure class="highlight java"><figcaption><span>DexFile.java</span><a href="https://android.googlesource.com/platform/libcore-snapshot/+/ics-mr1/dalvik/src/main/java/dalvik/system/DexFile.java" target="_blank" rel="external">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Opens a DEX file from a given filename. This will usually be a ZIP/JAR</span><br><span class="line"> * file with a "classes.dex" inside.</span><br><span class="line"> *</span><br><span class="line"> * ...</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DexFile</span><span class="params">(String fileName)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br></pre></td></tr></table></figure></p>
+<p>We can find out that the <code>DexFile</code> constructor only loads the <code>classes.dex</code> in the apk, while the file structure in the apk should be like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test.apk</span><br><span class="line">├── classes.dex</span><br><span class="line">└── classes2.dex</span><br></pre></td></tr></table></figure>
+<p>It means that the classes in <code>classes2.dex</code> will not be opened by default constructor.</p>
+<p>And the post by Google says that,</p>
+<blockquote>
+<p>… it is possible that other included libraries have additional dependency requirements including the use of introspection or invocation of Java methods from native code.<br>Some libraries may not be able to be used until the multidex build tools are updated to allow you to specify classes that must be included in the primary dex file.</p>
+</blockquote>
+<p>If we want to load all the classes in our project, we will need load the <code>classes2.dex</code>, <code>classes3.dex</code> manually.</p>
+<h2 id="Clue-2"><a href="#Clue-2" class="headerlink" title="Clue 2"></a>Clue 2</h2><p>Also from the post, we can find out that all the multi dex tasks start at <code>MultiDex.install(context)</code>(in <a href="https://android.googlesource.com/platform/frameworks/multidex/+/ddd65a611834d9a9222603b2e85d558265f0aa85/library/src/android/support/multidex/MultiDex.java" target="_blank" rel="external">MultiDex.java</a>), which calls the <code>MultiDexExtractor.load(context, applicationInfo, dexDir, false)</code>(in <a href="https://android.googlesource.com/platform/frameworks/multidex/+/ddd65a611834d9a9222603b2e85d558265f0aa85/library/src/android/support/multidex/MultiDexExtractor.java" target="_blank" rel="external">MultiDexExtractor.java</a>) to extract the apk and install extra dex files.</p>
+<p>And we can find a method called <code>MultiDexExtractor.loadExistingExtractions(...)</code> which can load existing secondary dex files that extracted by <code>MultiDexExtractor.load(...)</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//applicationInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 0)</span></span><br><span class="line"><span class="comment">//sourceApk       = new File(applicationInfo.sourceDir)</span></span><br><span class="line"><span class="comment">//                  ie: test.apk</span></span><br><span class="line"><span class="comment">//dexDir          = new File(applicationInfo.dataDir, SECONDARY_FOLDER_NAME); (in MultiDex.java)</span></span><br><span class="line"><span class="comment">//                  ie: /data/data/info.xudshen.test/code_cache/secondary-dexes</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;File&gt; <span class="title">loadExistingExtractions</span><span class="params">(Context context, File sourceApk, File dexDir)</span></span><br><span class="line">        <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    Log.i(TAG, <span class="string">"loading existing secondary dex files"</span>);</span><br><span class="line">    <span class="comment">//the prefix of extracted file, ie: test.classes</span></span><br><span class="line">    <span class="keyword">final</span> String extractedFilePrefix = sourceApk.getName() + EXTRACTED_NAME_EXT;</span><br><span class="line">    <span class="comment">//the total dex numbers</span></span><br><span class="line">    <span class="keyword">int</span> totalDexNumber = getMultiDexPreferences(context).getInt(KEY_DEX_NUMBER, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">final</span> List&lt;File&gt; files = <span class="keyword">new</span> ArrayList&lt;File&gt;(totalDexNumber);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> secondaryNumber = <span class="number">2</span>; secondaryNumber &lt;= totalDexNumber; secondaryNumber++) &#123;</span><br><span class="line">        <span class="comment">//for each dex file, ie: test.classes2.zip, test.classes3.zip...</span></span><br><span class="line">        String fileName = extractedFilePrefix + secondaryNumber + EXTRACTED_SUFFIX;</span><br><span class="line">        File extractedFile = <span class="keyword">new</span> File(dexDir, fileName);</span><br><span class="line">        <span class="keyword">if</span> (extractedFile.isFile()) &#123;</span><br><span class="line">            files.add(extractedFile);</span><br><span class="line">            <span class="comment">//verify the zip file</span></span><br><span class="line">            <span class="keyword">if</span> (!verifyZipFile(extractedFile)) &#123;</span><br><span class="line">                Log.i(TAG, <span class="string">"Invalid zip file: "</span> + extractedFile);</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Invalid ZIP file."</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Missing extracted secondary dex file '"</span> +</span><br><span class="line">                    extractedFile.getPath() + <span class="string">"'"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> files;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code indicates that all the extra dex files are extracted in <code>/data/data/&lt;packageName&gt;/code_cache/secondary-dexes</code>. What we need to do is getting the paths and passing it to <code>DexFile</code> constructor.</p>
+<p>Unfortunately, we can not call this method directly since <code>MultiDexExtractor.java</code> is a private class.<br>We will implement this part of code in our own project.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Here is the complete code in Gist.<br>This solution is based on <a href="https://android.googlesource.com/platform/frameworks/multidex/+/ddd65a611834d9a9222603b2e85d558265f0aa85" target="_blank" rel="external">platform/frameworks/multidex ddd65a611834d9a9222603b2e85d558265f0aa85</a>.</p>
+<p>We will need update the code once the extract path changes in <code>MultiDex.java</code>.</p>
+<script src="//gist.github.com/0a5e1a2a2814510f7f5a.js"></script>
+
+        <p style="margin-bottom: 20px"></p>
+      
+    </div>
+    <footer>
+      
+	 
+      
+          <p style="margin:0 0 20px 0; color:#9f9f9f; font-size:12px;">
+<span>Posted by <a style="color:#9f9f9f;" href="https://twitter.com/xudshen"><strong>xudshen</strong></a> - 2014-11-12</span><br />
+<span style="line-height:13px;">如需转载，请注明： 本文来自 <a style="color:#9f9f9f;" href="http://xudshen.info"><strong>xudshen&#39;s blog</strong></a></span>
+</p>
+      
+     		  
+       		
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>, <a href="/tags/Multidex/">Multidex</a>, <a href="/tags/65K/">65K</a>
+  </div>
+
+     		  
+       	 
+      
+      <div class="clearfix"></div>
+    </footer>
+    
+
+
+<div id="disqus_thread" style="border-top: 1px solid #e3e3e5; padding-top: 5px"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'xudsheninfo';
+  
+  var disqus_url = 'http://xudshen.info/2014/11/12/list-all-classes-after-multidex/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+  </div>
+</article>
+
+</div>
+    </div>
+    <div class="tabbar" onload="divideTabBar()">
+	
+      <div class="tabbaritem"><a class="next" href="/">Home</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/archives/">Archives</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/about/">About</a></div>
+    
+      <div class="tabbaritem"><a class="next" href="/atom.xml">Subscribe</a></div>
+    
+</div>
+
+
+  </div>
+</body>
+</html>
