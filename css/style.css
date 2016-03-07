@@ -241,6 +241,13 @@ article .post-content {
     padding: 10px;
   }
 }
+article .post-toc {
+  margin-left: 0 !important;
+  list-style: none;
+}
+article .post-toc-child {
+  list-style: none;
+}
 article .gallery {
   overflow: hidden;
   position: relative;

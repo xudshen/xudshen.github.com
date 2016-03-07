@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xudshen.info/"/>
-  <updated>2014-11-12T17:05:39.000Z</updated>
+  <updated>2016-03-07T07:37:31.000Z</updated>
   <id>http://xudshen.info/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Introducing DroidData</title>
+    <link href="http://xudshen.info/2016/03/07/introducing-droiddata/"/>
+    <id>http://xudshen.info/2016/03/07/introducing-droiddata/</id>
+    <published>2016-03-07T07:34:24.000Z</published>
+    <updated>2016-03-07T07:37:31.000Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
+&lt;h1 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
+&lt;h1 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h1&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>List All Classes after Multidex</title>
@@ -376,9 +396,9 @@
     </summary>
     
     
-      <category term="设计" scheme="http://xudshen.info/tags/%E8%AE%BE%E8%AE%A1/"/>
-    
       <category term="日常" scheme="http://xudshen.info/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+      <category term="设计" scheme="http://xudshen.info/tags/%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
@@ -387,27 +407,14 @@
     <link href="http://xudshen.info/2013/04/19/se-api-define/"/>
     <id>http://xudshen.info/2013/04/19/se-api-define/</id>
     <published>2013-04-19T02:12:00.000Z</published>
-    <updated>2016-03-06T15:34:01.000Z</updated>
+    <updated>2016-03-07T08:01:29.000Z</updated>
     
     <content type="html">&lt;p&gt;软件工程课程项目API&lt;/p&gt;
 &lt;p&gt;为了进行更好的分工合作，将API罗列如下…&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;#教程&lt;br&gt;由于项目将使用tomcat+struts2+mysql搭建，请认真阅读sample中的表格提交功能以及数据加载功能。&lt;/p&gt;
+&lt;h1 id=&quot;教程&quot;&gt;&lt;a href=&quot;#教程&quot; class=&quot;headerlink&quot; title=&quot;教程&quot;&gt;&lt;/a&gt;教程&lt;/h1&gt;&lt;p&gt;由于项目将使用tomcat+struts2+mysql搭建，请认真阅读sample中的表格提交功能以及数据加载功能。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://6carol6.github.io/blog/2013/04/20/school-management-system-outline/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Sample的一个简单的运行描述&lt;/a&gt; 感谢小组长&lt;a href=&quot;http://6carol6.github.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@6carol6&lt;/a&gt;童鞋。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;#API&lt;/p&gt;
-&lt;p&gt;###Index&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#1&quot;&gt;1. 登陆&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#2&quot;&gt;2. 学生&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#2-0&quot;&gt;2.0 class StuClass&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#2-1&quot;&gt;2.1 个人信息页面&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#2-1-1&quot;&gt;2.1.1 毕业信息核对&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;#2-1-2&quot;&gt;2.1.2 基本信息修改&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-
-&lt;h3&gt;&lt;a style=&quot;color:black&quot; name=&quot;1&quot;&gt;1. 登陆(/pages/Login.jsp)&lt;/a&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  Login&lt;/p&gt;
+&lt;h1 id=&quot;登陆-pages-Login-jsp&quot;&gt;&lt;a href=&quot;#登陆-pages-Login-jsp&quot; class=&quot;headerlink&quot; title=&quot;登陆(/pages/Login.jsp)&quot;&gt;&lt;/a&gt;登陆(/pages/Login.jsp)&lt;/h1&gt;&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  Login&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;servlet name:&lt;/code&gt; SampleProject.Login&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;page value:&lt;/code&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -460,11 +467,7 @@
 &lt;li&gt;验证码&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-
-&lt;h3&gt;&lt;a style=&quot;color:black&quot; name=&quot;2&quot;&gt;2. 学生&lt;/a&gt;&lt;/h3&gt;
-&lt;h4&gt;&lt;a style=&quot;color:black&quot; name=&quot;2-0&quot;&gt;2.0 class StuClass(/pages/student/info.jsp)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;table&gt;
+&lt;h1 id=&quot;学生&quot;&gt;&lt;a href=&quot;#学生&quot; class=&quot;headerlink&quot; title=&quot;学生&quot;&gt;&lt;/a&gt;学生&lt;/h1&gt;&lt;h2 id=&quot;class-StuClass-pages-student-info-jsp&quot;&gt;&lt;a href=&quot;#class-StuClass-pages-student-info-jsp&quot; class=&quot;headerlink&quot; title=&quot;class StuClass(/pages/student/info.jsp)&quot;&gt;&lt;/a&gt;class StuClass(/pages/student/info.jsp)&lt;/h2&gt;&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th style=&quot;text-align:left&quot;&gt;name&lt;/th&gt;
@@ -606,10 +609,7 @@
 &lt;p&gt;&lt;em&gt;例如：&lt;/em&gt;&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//页面需要name的值，&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;s:property value=&lt;span class=&quot;string&quot;&gt;&quot;detail.name&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//而在后台action的类里面，有&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; StuClass detail;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; StuClass &lt;span class=&quot;title&quot;&gt;getDetail&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.detail;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setDetail&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(StuClass detail)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.detail = detail;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//那么StuClass这个类中需要有name的getter，即：&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; StuClass &lt;span class=&quot;title&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; xxxxxx;&lt;span class=&quot;comment&quot;&gt;//随便返回什么，但它的值必须是我要的name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;hr&gt;
-
-&lt;h4&gt;&lt;a style=&quot;color:black&quot; name=&quot;2-1&quot;&gt;2.1 个人信息页面(/pages/student/info.jsp)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfo&lt;/p&gt;
+&lt;h2 id=&quot;个人信息页面-pages-student-info-jsp&quot;&gt;&lt;a href=&quot;#个人信息页面-pages-student-info-jsp&quot; class=&quot;headerlink&quot; title=&quot;个人信息页面(/pages/student/info.jsp)&quot;&gt;&lt;/a&gt;个人信息页面(/pages/student/info.jsp)&lt;/h2&gt;&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfo&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;servlet name:&lt;/code&gt; SampleProject.Student.Info&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;page value:&lt;/code&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -651,10 +651,7 @@
 &lt;li&gt;全局通知栏&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-
-&lt;h4&gt;&lt;a style=&quot;color:black&quot; name=&quot;2-1-1&quot;&gt;2.1.1 毕业信息核对(/pages/student/infoCheck.jsp)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfoCheck&lt;/p&gt;
+&lt;h3 id=&quot;毕业信息核对-pages-student-infoCheck-jsp&quot;&gt;&lt;a href=&quot;#毕业信息核对-pages-student-infoCheck-jsp&quot; class=&quot;headerlink&quot; title=&quot;毕业信息核对(/pages/student/infoCheck.jsp)&quot;&gt;&lt;/a&gt;毕业信息核对(/pages/student/infoCheck.jsp)&lt;/h3&gt;&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfoCheck&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;servlet name:&lt;/code&gt; SampleProject.Student.InfoCheck&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;page value:(????????)&lt;/code&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -749,10 +746,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;more TODO:&lt;/code&gt;&lt;/p&gt;
 &lt;hr&gt;
-
-&lt;h4&gt;&lt;a style=&quot;color:black&quot; name=&quot;2-1-2&quot;&gt;2.1.2 基本信息修改(/pages/student/infoModify.jsp)&lt;/a&gt;&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfoModify&lt;/p&gt;
+&lt;h3 id=&quot;基本信息修改-pages-student-infoModify-jsp&quot;&gt;&lt;a href=&quot;#基本信息修改-pages-student-infoModify-jsp&quot; class=&quot;headerlink&quot; title=&quot;基本信息修改(/pages/student/infoModify.jsp)&quot;&gt;&lt;/a&gt;基本信息修改(/pages/student/infoModify.jsp)&lt;/h3&gt;&lt;p&gt;&lt;code&gt;action name:&lt;/code&gt;  StuInfoModify&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;servlet name:&lt;/code&gt; SampleProject.Student.InfoModify&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;page value:&lt;/code&gt;&lt;/p&gt;
 &lt;table&gt;

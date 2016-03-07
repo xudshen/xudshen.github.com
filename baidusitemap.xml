@@ -3,6 +3,38 @@
 
 
     
+  <url>
+    <loc>http://xudshen.info/2013/04/19/se-api-define/</loc>
+    <lastmod>2016-03-07T08:01:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>软工_API定义</title>
+        <pubTime>2013-04-19T02:12:00.000Z</pubTime>
+        
+        <tag>软工</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xudshen.info/2016/03/07/introducing-droiddata/</loc>
+    <lastmod>2016-03-07T07:37:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>Introducing DroidData</title>
+        <pubTime>2016-03-07T07:34:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://xudshen.info/2014/10/21/good-music-awsome/</loc>
@@ -15,23 +47,6 @@
         <tag>日常</tag>
          
         <tag>音乐</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://xudshen.info/2013/04/19/se-api-define/</loc>
-    <lastmod>2016-03-06T15:34:01.000Z</lastmod>
-    <data>
-        <display>
-        <title>软工_API定义</title>
-        <pubTime>2013-04-19T02:12:00.000Z</pubTime>
-        
-        <tag>软工</tag>
          
          
            
@@ -205,9 +220,9 @@
         <title>[知乎]答：为什么现在的 GUI 设计仍跳不出 button、list、icon，没有这些元素的 GUI 会是什么样子？</title>
         <pubTime>2013-06-07T16:48:00.000Z</pubTime>
         
-        <tag>设计</tag>
-         
         <tag>日常</tag>
+         
+        <tag>设计</tag>
          
          
            
