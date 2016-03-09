@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xudshen.info/"/>
-  <updated>2016-03-07T07:37:31.000Z</updated>
+  <updated>2016-03-09T09:58:10.000Z</updated>
   <id>http://xudshen.info/</id>
   
   <author>
@@ -16,22 +16,97 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Introducing DroidData</title>
+    <title>Introducing DroidData (Preliminary)</title>
     <link href="http://xudshen.info/2016/03/07/introducing-droiddata/"/>
     <id>http://xudshen.info/2016/03/07/introducing-droiddata/</id>
     <published>2016-03-07T07:34:24.000Z</published>
-    <updated>2016-03-07T07:37:31.000Z</updated>
+    <updated>2016-03-09T09:58:10.000Z</updated>
     
-    <content type="html">&lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
-&lt;h1 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h1&gt;</content>
+    <content type="html">&lt;p&gt;There are already lots of discussions about the architecture of a quality android application, such as &lt;a href=&quot;https://github.com/pedrovgs/EffectiveAndroidUI/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;EffectiveAndroidUI&lt;/a&gt;, &lt;a href=&quot;http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android-CleanArchitecture&lt;/a&gt;, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;query-update-data-and-display-in-view&quot;&gt;&lt;a href=&quot;#query-update-data-and-display-in-view&quot; class=&quot;headerlink&quot; title=&quot;query/update data and display in view&quot;&gt;&lt;/a&gt;query/update data and display in view&lt;/h1&gt;&lt;p&gt;We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;View&lt;/code&gt; requests/updates data to &lt;code&gt;Presenter/ViewModel&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Presenter/ViewModel&lt;/code&gt; requests/updates data to &lt;code&gt;ModelDao&lt;/code&gt;(the &lt;code&gt;Business Logic&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ModelDao&lt;/code&gt; retrieves data(in the form of &lt;code&gt;Model&lt;/code&gt;) from &lt;code&gt;Database&lt;/code&gt;/&lt;code&gt;Web/Remote&lt;/code&gt; and returns to &lt;code&gt;Presenter&lt;/code&gt;&lt;br&gt;or &lt;code&gt;ModelDao&lt;/code&gt; updates data to &lt;code&gt;Database&lt;/code&gt;/&lt;code&gt;Web/Remote&lt;/code&gt; and returns result to &lt;code&gt;Presenter&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Presenter&lt;/code&gt; updates &lt;code&gt;View&lt;/code&gt; with retrieved data or the result&lt;/li&gt;
+&lt;li&gt;if we use a RecyclerView, &lt;code&gt;Presenter&lt;/code&gt; will need update &lt;code&gt;Adapter&lt;/code&gt; to update RecyclerView&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As we can see, &lt;code&gt;Presenter&lt;/code&gt; part acts as two roles: manipulates data with &lt;code&gt;ModelDao&lt;/code&gt; and displays data to &lt;code&gt;View&lt;/code&gt;.&lt;br&gt;Coding often becomes trivial when we implementing the displaying part and complicated when we updating different views with the same data source.&lt;br&gt;Taking an Excel app for example, displaying all the records requires code like &lt;code&gt;EditText.setText()&lt;/code&gt; to bind data with a RecyclerView. Also modifying record requires code to find that specific record in RecyclerView or the corresponding record in detail view, and update them.&lt;br&gt;(Show a diagram here)&lt;/p&gt;
+&lt;p&gt;We can skip &lt;code&gt;EditText.setText()&lt;/code&gt; part by taking the advantage of Google’s &lt;a href=&quot;http://developer.android.com/tools/data-binding/guide.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Data Binding&lt;/a&gt; library.&lt;br&gt;But what if we go further and more aggressive and directly bind Database with view through some way, then all the &lt;code&gt;Presenter&lt;/code&gt; has to do is updating the Database. &lt;code&gt;Presenter&lt;/code&gt; doesn’t need to care when the record is changed or which one of record is changed.&lt;br&gt;That is where the DroidData based on.&lt;/p&gt;
+&lt;h1 id=&quot;DroidData&quot;&gt;&lt;a href=&quot;#DroidData&quot; class=&quot;headerlink&quot; title=&quot;DroidData&quot;&gt;&lt;/a&gt;DroidData&lt;/h1&gt;&lt;p&gt;DroidData uses &lt;a href=&quot;http://developer.android.com/tools/data-binding/guide.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Data Binding&lt;/a&gt;(bind data to view), &lt;a href=&quot;http://developer.android.com/guide/topics/providers/content-providers.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ContentProvider&lt;/a&gt;(a native android library providing mechanisms to query data and notify data changes), &lt;a href=&quot;https://github.com/greenrobot/greenDAO&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GreenDao&lt;/a&gt;(a light &amp;amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;View&lt;/code&gt; requests/updates data to &lt;code&gt;Presenter/ViewModel&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Presenter/ViewModel&lt;/code&gt; requests/updates data to &lt;code&gt;ModelDao&lt;/code&gt;(the &lt;code&gt;Business Logic&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ModelDao&lt;/code&gt; determines if need retrieve data from &lt;code&gt;Web/Remote&lt;/code&gt; and saves data to &lt;code&gt;Database&lt;/code&gt;;&lt;br&gt;&lt;code&gt;ModelDao&lt;/code&gt; updates data to &lt;code&gt;Database&lt;/code&gt; or updates data to &lt;code&gt;Web/Remote&lt;/code&gt; then saves result to &lt;code&gt;Database&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ModelDao&lt;/code&gt; asynchronously notifies &lt;code&gt;ModelObservable&lt;/code&gt;/&lt;code&gt;ContentProvider&lt;/code&gt; that data source has changed&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ModelObservable&lt;/code&gt;/&lt;code&gt;ContentProvider&lt;/code&gt; notifies &lt;code&gt;View&lt;/code&gt;/&lt;code&gt;RecyclerView&lt;/code&gt;, and &lt;code&gt;View&lt;/code&gt;/&lt;code&gt;RecyclerView&lt;/code&gt; gets refreshed with new data&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The step4 and step5 are auto triggered with the generated code by DroidData. This will make our code more &lt;/p&gt;
+&lt;h1 id=&quot;efficiency-concern-and-violation-of-pattern&quot;&gt;&lt;a href=&quot;#efficiency-concern-and-violation-of-pattern&quot; class=&quot;headerlink&quot; title=&quot;efficiency concern and violation of pattern&quot;&gt;&lt;/a&gt;efficiency concern and violation of pattern&lt;/h1&gt;&lt;p&gt;All the notifications are triggered by the native ContentProvider.Also, DroidData provides a &lt;code&gt;DDCursorRecyclerAdapter&lt;/code&gt; to bind database with view by &lt;code&gt;Cursor&lt;/code&gt;, and ModelObservable map is stored with WeakReference.&lt;/p&gt;
+&lt;p&gt;It seems that DroidData violated the MV* pattern to some extent, because we connect &lt;code&gt;View&lt;/code&gt; and &lt;code&gt;Model&lt;/code&gt; directly. From another point of view, we actually connect &lt;code&gt;View&lt;/code&gt; with ContentProvider which can also be considered as &lt;code&gt;Presenter&lt;/code&gt;. Furthermore, DroidData makes test more straightforward. We can test the &lt;code&gt;Presenter&lt;/code&gt; without the &lt;code&gt;View&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot; class=&quot;headerlink&quot; title=&quot;conclusion&quot;&gt;&lt;/a&gt;conclusion&lt;/h1&gt;&lt;!---
+retrieve data from db and internet
+  handle all the other queries
+  do special logic depending on the internet connectivity
+
+when we use list, for the efficiency, we need load data with pagination,
+  this also requires we judge when we should load local/remote
+
+with cursorAdapter, we could load all the data in db. after that, we can do the load more action on the end of the list
+
+
+
+furthermore, when we need update/insert/delete item in that list, we should notify the cursor with data changes. this is also some repeat? code
+how could we get notified when the data has changed? With Android ContentProvider, we could achieve this, even ContentProvider is meant to share 
+data between applications(We could disable it by add some restrictions).
+
+
+what if we combine this two, we could change data, then notify ContentProvider -&gt; Cursor -&gt; View.
+
+
+
+
+because we only read data from cursor, even though it is somehow disobey the rule of MVC,
+this make the unit test much more easier 
+
+
+
+Android DataBinding -&gt; part of MVC, more like MVP
+
+&quot;some of the architectural aspects employed in Android violate the very basic principles of MVC/MVP&quot;
+
+
+Activity (and Fragment) is bad candidate for MVC view – it is too tightly coupled with Android framework
+it is simply impossible to work around it and implement a proper MVC/MVP
+
+
+
+make the CursorAdapter part is the presenter part
+
+non-trivial
+
+
+1. update one place, notify all place
+2. decrease duplicate code
+3. easy to test
+--&gt;
+</content>
     
     <summary type="html">
     
-      &lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
-&lt;h1 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h1&gt;
+      &lt;p&gt;There are already lots of discussions about the architecture of a quality android application, such as &lt;a href=&quot;https://github.com/pedrovgs/EffectiveAndroidUI/&quot;&gt;EffectiveAndroidUI&lt;/a&gt;, &lt;a href=&quot;http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/&quot;&gt;Android-CleanArchitecture&lt;/a&gt;, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.&lt;/p&gt;
     
     </summary>
     
+    
+      <category term="Android" scheme="http://xudshen.info/tags/Android/"/>
+    
+      <category term="MVVM" scheme="http://xudshen.info/tags/MVVM/"/>
+    
+      <category term="DataBinding" scheme="http://xudshen.info/tags/DataBinding/"/>
+    
+      <category term="GreenDao" scheme="http://xudshen.info/tags/GreenDao/"/>
     
   </entry>
   

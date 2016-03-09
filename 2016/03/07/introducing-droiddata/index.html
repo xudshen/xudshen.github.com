@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Introducing DroidData | xudshen&#39;s blog</title>
+  <title>Introducing DroidData (Preliminary) | xudshen&#39;s blog</title>
   <meta name="author" content="Xudong Shen">
   
-  <meta name="description" content="&amp;lt;%- toc(page.content) %&amp;gt;
-1">
+  <meta name="description" content="There are already lots of discussions about the architecture of a quality android application, such as EffectiveAndroidUI, Android-CleanArchitecture, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.">
   
   
-  <meta property="og:title" content="Introducing DroidData"/>
+  <meta property="og:title" content="Introducing DroidData (Preliminary)"/>
   <meta property="og:site_name" content="xudshen&#39;s blog"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -51,9 +50,9 @@
 
   
 <div class="widget tagcloud">
-  <h3 class="title">Tags</h3>
+  <h3 class="title">标签云</h3>
   <div class="entry">
-    <a href="/tags/65K/" style="font-size: 10px;">65K</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Gson/" style="font-size: 10px;">Gson</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/Multidex/" style="font-size: 10px;">Multidex</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/RxMqtt/" style="font-size: 10px;">RxMqtt</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/WinRT/" style="font-size: 15px;">WinRT</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/Yosemite/" style="font-size: 10px;">Yosemite</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/视差滚动/" style="font-size: 10px;">视差滚动</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/软工/" style="font-size: 10px;">软工</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
+    <a href="/tags/65K/" style="font-size: 10px;">65K</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/DataBinding/" style="font-size: 10px;">DataBinding</a> <a href="/tags/GreenDao/" style="font-size: 10px;">GreenDao</a> <a href="/tags/Gson/" style="font-size: 10px;">Gson</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/Multidex/" style="font-size: 10px;">Multidex</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/RxMqtt/" style="font-size: 10px;">RxMqtt</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/WinRT/" style="font-size: 15px;">WinRT</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/Yosemite/" style="font-size: 10px;">Yosemite</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/视差滚动/" style="font-size: 10px;">视差滚动</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/软工/" style="font-size: 10px;">软工</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
   </div>
 </div>
 
@@ -68,7 +67,7 @@
 
   <div class="widget search">
   <form accept-charset="utf-8">
-    <input id="st-search-input" type="text" name="q" placeholder="Search">
+    <input id="st-search-input" type="text" name="q" placeholder="搜索">
   </form>
 </div>
 
@@ -123,7 +122,7 @@
       
       
   
-    <h1 class="title">Introducing DroidData</h1>
+    <h1 class="title">Introducing DroidData (Preliminary)</h1>
   
 
       <time datetime="2016-03-07T07:34:24.000Z"><a href="/2016/03/07/introducing-droiddata/">2016-03-07</a></time>
@@ -131,9 +130,77 @@
   </header>
     <div class="entry">
       
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1"><span class="post-toc-number">1.</span> <span class="post-toc-text">1</span></a></li></ol>
-        <p>&lt;%- toc(page.content) %&gt;</p>
-<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#query-update-data-and-display-in-view"><span class="post-toc-number">1.</span> <span class="post-toc-text">query/update data and display in view</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DroidData"><span class="post-toc-number">2.</span> <span class="post-toc-text">DroidData</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#efficiency-concern-and-violation-of-pattern"><span class="post-toc-number">3.</span> <span class="post-toc-text">efficiency concern and violation of pattern</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#conclusion"><span class="post-toc-number">4.</span> <span class="post-toc-text">conclusion</span></a></li></ol>
+        <p>There are already lots of discussions about the architecture of a quality android application, such as <a href="https://github.com/pedrovgs/EffectiveAndroidUI/" target="_blank" rel="external">EffectiveAndroidUI</a>, <a href="http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/" target="_blank" rel="external">Android-CleanArchitecture</a>, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.</p>
+<a id="more"></a>
+<h1 id="query-update-data-and-display-in-view"><a href="#query-update-data-and-display-in-view" class="headerlink" title="query/update data and display in view"></a>query/update data and display in view</h1><p>We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:</p>
+<ol>
+<li><code>View</code> requests/updates data to <code>Presenter/ViewModel</code></li>
+<li><code>Presenter/ViewModel</code> requests/updates data to <code>ModelDao</code>(the <code>Business Logic</code>)</li>
+<li><code>ModelDao</code> retrieves data(in the form of <code>Model</code>) from <code>Database</code>/<code>Web/Remote</code> and returns to <code>Presenter</code><br>or <code>ModelDao</code> updates data to <code>Database</code>/<code>Web/Remote</code> and returns result to <code>Presenter</code></li>
+<li><code>Presenter</code> updates <code>View</code> with retrieved data or the result</li>
+<li>if we use a RecyclerView, <code>Presenter</code> will need update <code>Adapter</code> to update RecyclerView</li>
+</ol>
+<p>As we can see, <code>Presenter</code> part acts as two roles: manipulates data with <code>ModelDao</code> and displays data to <code>View</code>.<br>Coding often becomes trivial when we implementing the displaying part and complicated when we updating different views with the same data source.<br>Taking an Excel app for example, displaying all the records requires code like <code>EditText.setText()</code> to bind data with a RecyclerView. Also modifying record requires code to find that specific record in RecyclerView or the corresponding record in detail view, and update them.<br>(Show a diagram here)</p>
+<p>We can skip <code>EditText.setText()</code> part by taking the advantage of Google’s <a href="http://developer.android.com/tools/data-binding/guide.html" target="_blank" rel="external">Data Binding</a> library.<br>But what if we go further and more aggressive and directly bind Database with view through some way, then all the <code>Presenter</code> has to do is updating the Database. <code>Presenter</code> doesn’t need to care when the record is changed or which one of record is changed.<br>That is where the DroidData based on.</p>
+<h1 id="DroidData"><a href="#DroidData" class="headerlink" title="DroidData"></a>DroidData</h1><p>DroidData uses <a href="http://developer.android.com/tools/data-binding/guide.html" target="_blank" rel="external">Data Binding</a>(bind data to view), <a href="http://developer.android.com/guide/topics/providers/content-providers.html" target="_blank" rel="external">ContentProvider</a>(a native android library providing mechanisms to query data and notify data changes), <a href="https://github.com/greenrobot/greenDAO" target="_blank" rel="external">GreenDao</a>(a light &amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.</p>
+<ol>
+<li><code>View</code> requests/updates data to <code>Presenter/ViewModel</code></li>
+<li><code>Presenter/ViewModel</code> requests/updates data to <code>ModelDao</code>(the <code>Business Logic</code>)</li>
+<li><code>ModelDao</code> determines if need retrieve data from <code>Web/Remote</code> and saves data to <code>Database</code>;<br><code>ModelDao</code> updates data to <code>Database</code> or updates data to <code>Web/Remote</code> then saves result to <code>Database</code></li>
+<li><code>ModelDao</code> asynchronously notifies <code>ModelObservable</code>/<code>ContentProvider</code> that data source has changed</li>
+<li><code>ModelObservable</code>/<code>ContentProvider</code> notifies <code>View</code>/<code>RecyclerView</code>, and <code>View</code>/<code>RecyclerView</code> gets refreshed with new data</li>
+</ol>
+<p>The step4 and step5 are auto triggered with the generated code by DroidData. This will make our code more </p>
+<h1 id="efficiency-concern-and-violation-of-pattern"><a href="#efficiency-concern-and-violation-of-pattern" class="headerlink" title="efficiency concern and violation of pattern"></a>efficiency concern and violation of pattern</h1><p>All the notifications are triggered by the native ContentProvider.Also, DroidData provides a <code>DDCursorRecyclerAdapter</code> to bind database with view by <code>Cursor</code>, and ModelObservable map is stored with WeakReference.</p>
+<p>It seems that DroidData violated the MV* pattern to some extent, because we connect <code>View</code> and <code>Model</code> directly. From another point of view, we actually connect <code>View</code> with ContentProvider which can also be considered as <code>Presenter</code>. Furthermore, DroidData makes test more straightforward. We can test the <code>Presenter</code> without the <code>View</code>.</p>
+<h1 id="conclusion"><a href="#conclusion" class="headerlink" title="conclusion"></a>conclusion</h1><!---
+retrieve data from db and internet
+  handle all the other queries
+  do special logic depending on the internet connectivity
+
+when we use list, for the efficiency, we need load data with pagination,
+  this also requires we judge when we should load local/remote
+
+with cursorAdapter, we could load all the data in db. after that, we can do the load more action on the end of the list
+
+
+
+furthermore, when we need update/insert/delete item in that list, we should notify the cursor with data changes. this is also some repeat? code
+how could we get notified when the data has changed? With Android ContentProvider, we could achieve this, even ContentProvider is meant to share 
+data between applications(We could disable it by add some restrictions).
+
+
+what if we combine this two, we could change data, then notify ContentProvider -> Cursor -> View.
+
+
+
+
+because we only read data from cursor, even though it is somehow disobey the rule of MVC,
+this make the unit test much more easier 
+
+
+
+Android DataBinding -> part of MVC, more like MVP
+
+"some of the architectural aspects employed in Android violate the very basic principles of MVC/MVP"
+
+
+Activity (and Fragment) is bad candidate for MVC view – it is too tightly coupled with Android framework
+it is simply impossible to work around it and implement a proper MVC/MVP
+
+
+
+make the CursorAdapter part is the presenter part
+
+non-trivial
+
+
+1. update one place, notify all place
+2. decrease duplicate code
+3. easy to test
+-->
+
         <p style="margin-bottom: 20px"></p>
       
     </div>
@@ -148,6 +215,11 @@
       
      		  
        		
+  
+  <div class="tags">
+    <a href="/tags/Android/">Android</a>, <a href="/tags/MVVM/">MVVM</a>, <a href="/tags/DataBinding/">DataBinding</a>, <a href="/tags/GreenDao/">GreenDao</a>
+  </div>
+
      		  
        	 
       
