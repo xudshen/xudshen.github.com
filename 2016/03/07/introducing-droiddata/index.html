@@ -50,7 +50,7 @@
 
   
 <div class="widget tagcloud">
-  <h3 class="title">标签云</h3>
+  <h3 class="title">Tags</h3>
   <div class="entry">
     <a href="/tags/65K/" style="font-size: 10px;">65K</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/DataBinding/" style="font-size: 10px;">DataBinding</a> <a href="/tags/GreenDao/" style="font-size: 10px;">GreenDao</a> <a href="/tags/Gson/" style="font-size: 10px;">Gson</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/Homebrew/" style="font-size: 10px;">Homebrew</a> <a href="/tags/JS/" style="font-size: 10px;">JS</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQTT/" style="font-size: 10px;">MQTT</a> <a href="/tags/MVVM/" style="font-size: 10px;">MVVM</a> <a href="/tags/Multidex/" style="font-size: 10px;">Multidex</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/RxMqtt/" style="font-size: 10px;">RxMqtt</a> <a href="/tags/Spring-MVC/" style="font-size: 10px;">Spring MVC</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/WinRT/" style="font-size: 15px;">WinRT</a> <a href="/tags/Xcode/" style="font-size: 10px;">Xcode</a> <a href="/tags/Yosemite/" style="font-size: 10px;">Yosemite</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/日常/" style="font-size: 20px;">日常</a> <a href="/tags/视差滚动/" style="font-size: 10px;">视差滚动</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/软工/" style="font-size: 10px;">软工</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a>
   </div>
@@ -67,7 +67,7 @@
 
   <div class="widget search">
   <form accept-charset="utf-8">
-    <input id="st-search-input" type="text" name="q" placeholder="搜索">
+    <input id="st-search-input" type="text" name="q" placeholder="Search">
   </form>
 </div>
 
@@ -133,7 +133,7 @@
         <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#query-update-data-and-display-in-view"><span class="post-toc-number">1.</span> <span class="post-toc-text">query/update data and display in view</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#DroidData"><span class="post-toc-number">2.</span> <span class="post-toc-text">DroidData</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#efficiency-concern-and-violation-of-pattern"><span class="post-toc-number">3.</span> <span class="post-toc-text">efficiency concern and violation of pattern</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#conclusion"><span class="post-toc-number">4.</span> <span class="post-toc-text">conclusion</span></a></li></ol>
         <p>There are already lots of discussions about the architecture of a quality android application, such as <a href="https://github.com/pedrovgs/EffectiveAndroidUI/" target="_blank" rel="external">EffectiveAndroidUI</a>, <a href="http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/" target="_blank" rel="external">Android-CleanArchitecture</a>, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.</p>
 <a id="more"></a>
-<h1 id="query-update-data-and-display-in-view"><a href="#query-update-data-and-display-in-view" class="headerlink" title="query/update data and display in view"></a>query/update data and display in view</h1><p>We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:</p>
+<h1 id="query-update-data-and-display-in-view"><a href="#query-update-data-and-display-in-view" class="headerlink" title="query/update data and display in view"></a>query/update data and display in view</h1><p>We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:<br><img src="DroidData.1.jpg" alt="Old Way"></p>
 <ol>
 <li><code>View</code> requests/updates data to <code>Presenter/ViewModel</code></li>
 <li><code>Presenter/ViewModel</code> requests/updates data to <code>ModelDao</code>(the <code>Business Logic</code>)</li>
@@ -143,7 +143,7 @@
 </ol>
 <p>As we can see, <code>Presenter</code> part acts as two roles: manipulates data with <code>ModelDao</code> and displays data to <code>View</code>.<br>Coding often becomes trivial when we implementing the displaying part and complicated when we updating different views with the same data source.<br>Taking an Excel app for example, displaying all the records requires code like <code>EditText.setText()</code> to bind data with a RecyclerView. Also modifying record requires code to find that specific record in RecyclerView or the corresponding record in detail view, and update them.<br>(Show a diagram here)</p>
 <p>We can skip <code>EditText.setText()</code> part by taking the advantage of Google’s <a href="http://developer.android.com/tools/data-binding/guide.html" target="_blank" rel="external">Data Binding</a> library.<br>But what if we go further and more aggressive and directly bind Database with view through some way, then all the <code>Presenter</code> has to do is updating the Database. <code>Presenter</code> doesn’t need to care when the record is changed or which one of record is changed.<br>That is where the DroidData based on.</p>
-<h1 id="DroidData"><a href="#DroidData" class="headerlink" title="DroidData"></a>DroidData</h1><p>DroidData uses <a href="http://developer.android.com/tools/data-binding/guide.html" target="_blank" rel="external">Data Binding</a>(bind data to view), <a href="http://developer.android.com/guide/topics/providers/content-providers.html" target="_blank" rel="external">ContentProvider</a>(a native android library providing mechanisms to query data and notify data changes), <a href="https://github.com/greenrobot/greenDAO" target="_blank" rel="external">GreenDao</a>(a light &amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.</p>
+<h1 id="DroidData"><a href="#DroidData" class="headerlink" title="DroidData"></a>DroidData</h1><p>DroidData uses <a href="http://developer.android.com/tools/data-binding/guide.html" target="_blank" rel="external">Data Binding</a>(bind data to view), <a href="http://developer.android.com/guide/topics/providers/content-providers.html" target="_blank" rel="external">ContentProvider</a>(a native android library providing mechanisms to query data and notify data changes), <a href="https://github.com/greenrobot/greenDAO" target="_blank" rel="external">GreenDao</a>(a light &amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.<br><img src="DroidData.2.jpg" alt="Old Way"></p>
 <ol>
 <li><code>View</code> requests/updates data to <code>Presenter/ViewModel</code></li>
 <li><code>Presenter/ViewModel</code> requests/updates data to <code>ModelDao</code>(the <code>Business Logic</code>)</li>

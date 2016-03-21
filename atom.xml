@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xudshen.info/"/>
-  <updated>2016-03-09T09:58:10.000Z</updated>
+  <updated>2016-03-21T06:29:26.000Z</updated>
   <id>http://xudshen.info/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://xudshen.info/2016/03/07/introducing-droiddata/"/>
     <id>http://xudshen.info/2016/03/07/introducing-droiddata/</id>
     <published>2016-03-07T07:34:24.000Z</published>
-    <updated>2016-03-09T09:58:10.000Z</updated>
+    <updated>2016-03-21T06:29:26.000Z</updated>
     
     <content type="html">&lt;p&gt;There are already lots of discussions about the architecture of a quality android application, such as &lt;a href=&quot;https://github.com/pedrovgs/EffectiveAndroidUI/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;EffectiveAndroidUI&lt;/a&gt;, &lt;a href=&quot;http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Android-CleanArchitecture&lt;/a&gt;, which use some common patterns like MVC, MVP or MVVM. However, what we are going to talk about in this post is not which one of these architectures is the best, but some kind solution while implementing these architectures.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;query-update-data-and-display-in-view&quot;&gt;&lt;a href=&quot;#query-update-data-and-display-in-view&quot; class=&quot;headerlink&quot; title=&quot;query/update data and display in view&quot;&gt;&lt;/a&gt;query/update data and display in view&lt;/h1&gt;&lt;p&gt;We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:&lt;/p&gt;
+&lt;h1 id=&quot;query-update-data-and-display-in-view&quot;&gt;&lt;a href=&quot;#query-update-data-and-display-in-view&quot; class=&quot;headerlink&quot; title=&quot;query/update data and display in view&quot;&gt;&lt;/a&gt;query/update data and display in view&lt;/h1&gt;&lt;p&gt;We all meet this kind of use case while using a MVP/MVVM pattern as the diagram shows:&lt;br&gt;&lt;img src=&quot;DroidData.1.jpg&quot; alt=&quot;Old Way&quot;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;View&lt;/code&gt; requests/updates data to &lt;code&gt;Presenter/ViewModel&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Presenter/ViewModel&lt;/code&gt; requests/updates data to &lt;code&gt;ModelDao&lt;/code&gt;(the &lt;code&gt;Business Logic&lt;/code&gt;)&lt;/li&gt;
@@ -34,7 +34,7 @@
 &lt;/ol&gt;
 &lt;p&gt;As we can see, &lt;code&gt;Presenter&lt;/code&gt; part acts as two roles: manipulates data with &lt;code&gt;ModelDao&lt;/code&gt; and displays data to &lt;code&gt;View&lt;/code&gt;.&lt;br&gt;Coding often becomes trivial when we implementing the displaying part and complicated when we updating different views with the same data source.&lt;br&gt;Taking an Excel app for example, displaying all the records requires code like &lt;code&gt;EditText.setText()&lt;/code&gt; to bind data with a RecyclerView. Also modifying record requires code to find that specific record in RecyclerView or the corresponding record in detail view, and update them.&lt;br&gt;(Show a diagram here)&lt;/p&gt;
 &lt;p&gt;We can skip &lt;code&gt;EditText.setText()&lt;/code&gt; part by taking the advantage of Google’s &lt;a href=&quot;http://developer.android.com/tools/data-binding/guide.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Data Binding&lt;/a&gt; library.&lt;br&gt;But what if we go further and more aggressive and directly bind Database with view through some way, then all the &lt;code&gt;Presenter&lt;/code&gt; has to do is updating the Database. &lt;code&gt;Presenter&lt;/code&gt; doesn’t need to care when the record is changed or which one of record is changed.&lt;br&gt;That is where the DroidData based on.&lt;/p&gt;
-&lt;h1 id=&quot;DroidData&quot;&gt;&lt;a href=&quot;#DroidData&quot; class=&quot;headerlink&quot; title=&quot;DroidData&quot;&gt;&lt;/a&gt;DroidData&lt;/h1&gt;&lt;p&gt;DroidData uses &lt;a href=&quot;http://developer.android.com/tools/data-binding/guide.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Data Binding&lt;/a&gt;(bind data to view), &lt;a href=&quot;http://developer.android.com/guide/topics/providers/content-providers.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ContentProvider&lt;/a&gt;(a native android library providing mechanisms to query data and notify data changes), &lt;a href=&quot;https://github.com/greenrobot/greenDAO&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GreenDao&lt;/a&gt;(a light &amp;amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.&lt;/p&gt;
+&lt;h1 id=&quot;DroidData&quot;&gt;&lt;a href=&quot;#DroidData&quot; class=&quot;headerlink&quot; title=&quot;DroidData&quot;&gt;&lt;/a&gt;DroidData&lt;/h1&gt;&lt;p&gt;DroidData uses &lt;a href=&quot;http://developer.android.com/tools/data-binding/guide.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Data Binding&lt;/a&gt;(bind data to view), &lt;a href=&quot;http://developer.android.com/guide/topics/providers/content-providers.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ContentProvider&lt;/a&gt;(a native android library providing mechanisms to query data and notify data changes), &lt;a href=&quot;https://github.com/greenrobot/greenDAO&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GreenDao&lt;/a&gt;(a light &amp;amp; fast ORM solution for manipulating data in SQLite Databases) to accomplish above goal.&lt;br&gt;&lt;img src=&quot;DroidData.2.jpg&quot; alt=&quot;Old Way&quot;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;View&lt;/code&gt; requests/updates data to &lt;code&gt;Presenter/ViewModel&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Presenter/ViewModel&lt;/code&gt; requests/updates data to &lt;code&gt;ModelDao&lt;/code&gt;(the &lt;code&gt;Business Logic&lt;/code&gt;)&lt;/li&gt;
@@ -471,9 +471,9 @@ non-trivial
     </summary>
     
     
-      <category term="日常" scheme="http://xudshen.info/tags/%E6%97%A5%E5%B8%B8/"/>
-    
       <category term="设计" scheme="http://xudshen.info/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="日常" scheme="http://xudshen.info/tags/%E6%97%A5%E5%B8%B8/"/>
     
   </entry>
   
